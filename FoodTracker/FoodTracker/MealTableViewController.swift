@@ -21,9 +21,17 @@ class MealTableViewController: UITableViewController {
         
         navigationItem.leftBarButtonItem = editButtonItem
         
-        //load sample data
-        loadSampleMeals()
+        //if loadMeals successfully returns a list of Meals 
+        //condition body is executed. if statement body not executed
+        //if loadMeals() returns nil
         
+        if let savedMeals = loadMeals() {
+            meals += savedMeals
+        }
+        else {
+            // Load the sample data.
+            loadSampleMeals()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +88,9 @@ class MealTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             meals.remove(at: indexPath.row)
+            
+            //update the locally saved list of meal objects
+            saveMeals()
             
             //controller logic finished, now update the ui
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -165,6 +176,8 @@ class MealTableViewController: UITableViewController {
                     tableView.insertRows(at: [newIndexPath], with: .automatic)
                 }
             
+                saveMeals()
+            
         }
         
         
@@ -189,6 +202,22 @@ class MealTableViewController: UITableViewController {
         }
         
         meals += [meal1, meal2, meal3]
+    }
+    
+    private func saveMeals(){
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
+        
+        if isSuccessfulSave {
+            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save meals...", log: OSLog.default, type: .error)
+        }
+        
+    }
+    
+    //return type of optional Meal array. An array of meal objects or nil might be returned
+    private func loadMeals() -> [Meal]?{
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
     }
 
 }
