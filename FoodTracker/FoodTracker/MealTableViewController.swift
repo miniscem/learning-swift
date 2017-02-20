@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import os.log
+
 
 class MealTableViewController: UITableViewController {
 
@@ -15,8 +17,13 @@ class MealTableViewController: UITableViewController {
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+        
         //load sample data
         loadSampleMeals()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,25 +66,28 @@ class MealTableViewController: UITableViewController {
     }
  
     
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+ 
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            meals.remove(at: indexPath.row)
+            
+            //controller logic finished, now update the ui
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -94,26 +104,67 @@ class MealTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? ""){
+            case "AddItem":
+                os_log("Adding a new meal.", log: OSLog.default, type: .debug)
+
+            case "ShowDetail":
+                guard let mealDetailViewController = segue.destination as? MealViewController else {
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                
+                guard let selectedMealCell = sender as? MealTableViewCell else {
+                    fatalError("Unexpected sender: \(sender)")
+                }
+                
+                guard let indexPath = tableView.indexPath(for: selectedMealCell) else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                
+                let selectedMeal = meals[indexPath.row]
+                
+                //finally, pass the selected meal between controllers.
+                mealDetailViewController.meal = selectedMeal
+            
+            default:
+                os_log("in default case of switch", type: .debug)
+        }
+        
     }
-    */
+ 
     
     //MARK: actions
     
     @IBAction func unwindToMealList(sender: UIStoryboardSegue){
+        
         if let sourceViewController = sender.source as? MealViewController, let meal =
             sourceViewController.meal {
+  
+                //can also access tableView.indexPathForSelectedRow as
+                //super.tableView.indexPathForSelectedRow
+                if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                    // Update an existing meal.
+                    meals[selectedIndexPath.row] = meal
+                    
+                    //controller logic complete, update the ui
+                    tableView.reloadRows(at: [selectedIndexPath], with: .none)
+                    
+                }else{
+                    let newIndexPath = IndexPath(row: meals.count, section: 0)
+                    
+                    meals.append(meal)
+                    
+                    //controller logic complete, update the ui
+                    tableView.insertRows(at: [newIndexPath], with: .automatic)
+                }
             
-                let newIndexPath = IndexPath(row: meals.count, section: 0)
-            
-                meals.append(meal)
-            	tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
         
         

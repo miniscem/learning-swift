@@ -28,6 +28,15 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
+        
+        //loading the meal if it is non-nil
+        if let meal = meal{
+            navigationItem.title = meal.name
+            nameTextField.text = meal.name
+            photoImageView.image = meal.photo
+            ratingControl.rating = meal.rating
+        }
+        
         updateSaveButtonState()
     }
     
@@ -71,7 +80,26 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     //MARK: Navigation
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        
+        //we know the UINavigationController is presenting the scene if the user clicks the Add button in the nav bar
+        //this is how the modal window is set up. 
+        //if the user navigates to the detail page from the table cell, push nav is used.
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddMealMode {
+            dismiss(animated: true, completion: nil)
+        }else if let owningNavigationController = navigationController{
+            //if user is editing an existing meal, the use will touch the table view cell
+            //the view controller will get added to the navigation stack. Therefore we need to pop (remove)
+            //the newly added scene from the navigation stack to reveal the scene under it (the last scene)
+            owningNavigationController.popViewController(animated: true)
+        }else{
+            //else statement should never execute, this cancel button should only be presented if a 
+            //modal popup window was shown or a view controller was added to the navigation stack.
+            fatalError("The MealViewController is not inside a navigation controller.")
+        }
+        
+        
     }
     
     //This method lets you configure a view controller before it's presented.
@@ -84,6 +112,8 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             return
         }
         
+        //pass values from ui controls to local meal object
+        //the meal object will be read from the destinationControllerView
         let name = nameTextField.text ?? ""
         let photo = photoImageView.image
         let rating = ratingControl.rating
