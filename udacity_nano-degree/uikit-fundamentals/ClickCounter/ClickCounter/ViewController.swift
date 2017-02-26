@@ -37,14 +37,14 @@ class ViewController: UIViewController {
         //button
         let button = UIButton()
         button.frame = CGRect.init(x: 100, y: 350, width: 200, height: 60)
-        button.setTitle("Click to increment", for: .normal)
+        button.setTitle("increment", for: .normal)
         button.setTitleColor(UIColor.blue, for: .normal)
         self.view.addSubview(button)
         button.addTarget(self, action: #selector(ViewController.incrementCount), for: UIControlEvents.touchUpInside)
         
         let decrementButton = UIButton()
-        decrementButton.frame = CGRect.init(x: 200, y: 450, width: 200, height: 60)
-        decrementButton.setTitle("Click to decrement", for: .normal)
+        decrementButton.frame = CGRect.init(x: 100, y: 450, width: 200, height: 60)
+        decrementButton.setTitle("decrement", for: .normal)
         decrementButton.setTitleColor(UIColor.red, for: .normal)
         self.view.addSubview(decrementButton)
         decrementButton.addTarget(self, action: #selector(ViewController.decrementCount), for: UIControlEvents.touchUpInside)
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         //toggle background color on click
         let changeBackgroundButton = UIButton()
         changeBackgroundButton.frame = CGRect.init(x: 100, y: 550, width: 200, height: 60)
-        changeBackgroundButton.setTitle("Change view background color", for: .normal)
+        changeBackgroundButton.setTitle("Change background", for: .normal)
         changeBackgroundButton.setTitleColor(UIColor.green, for: .normal)
         
         self.view.addSubview(changeBackgroundButton)
