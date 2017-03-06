@@ -54,7 +54,11 @@ class ViewController: UIViewController {
     
     //making a programatic connection between viewcontrollers
     @IBAction func experiment_customVc(_ sender: AnyObject){
-        let customVc = self.storyboard?.instantiateViewController(withIdentifier: "MySecondViewController") as! MySecondViewController
+        var customVc: MySecondViewController
+        
+        customVc = self.storyboard?.instantiateViewController(withIdentifier: "MySecondViewController") as! MySecondViewController
+        customVc.firstValue = 1
+        customVc.secondValue = 2
         
         self.present(customVc, animated: true, completion: nil)
         

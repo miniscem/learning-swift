@@ -1,19 +1,23 @@
 //
-//  MySecondViewController.swift
-//  Experiment
+//  ResultsViewController.swift
+//  RoshamboChallenge
 //
-//  Created by Minisce, Mark on 2/26/17.
+//  Created by Minisce, Mark on 3/6/17.
 //  Copyright © 2017 Minisce, Mark. All rights reserved.
 //
 
 import UIKit
 
-class MySecondViewController: UIViewController {
+class ResultsViewController: UIViewController {
     
-    @IBOutlet weak var label: UILabel!
-    var firstValue: Int
-    var secondValue: Int
+    @IBOutlet weak var resultsLabel: UILabel!
+    @IBOutlet weak var playAgainButton: UIButton!
+    @IBOutlet weak var roundImage: UIImageView!
+    
+    var userPlay: String = ""
+    var computerPlay: String = "" 
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
