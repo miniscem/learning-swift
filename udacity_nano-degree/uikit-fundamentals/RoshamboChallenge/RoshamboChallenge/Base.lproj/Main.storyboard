@@ -24,7 +24,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg3-rl-a8K">
                                 <rect key="frame" x="38" y="81" width="75" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="paper"/>
+                                <state key="normal" title="Paper" image="paper"/>
                                 <connections>
                                     <action selector="throwPaper:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xid-Iv-dvj"/>
                                 </connections>
@@ -32,15 +32,18 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zB9-0O-dcm">
                                 <rect key="frame" x="153" y="83" width="69" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="rock"/>
+                                <state key="normal" title="Rock" image="rock"/>
                                 <connections>
-                                    <action selector="throwRock:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hVe-dn-P6V"/>
+                                    <action selector="throwRockWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4lR-Da-cVh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YL1-cz-Z3v">
                                 <rect key="frame" x="271" y="84" width="72" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="scissors"/>
+                                <state key="normal" title="Scissors" image="scissors"/>
+                                <connections>
+                                    <segue destination="fuS-y6-LVT" kind="show" identifier="play" id="anx-AF-UeS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDb-U8-okB">
                                 <rect key="frame" x="86" y="287" width="202" height="93"/>
@@ -51,17 +54,19 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <segue destination="fuS-y6-LVT" kind="show" identifier="rockSegue" id="ELm-Tp-rgy"/>
+                        <outlet property="paperButton" destination="fg3-rl-a8K" id="RbL-jy-72y"/>
+                        <outlet property="rockButton" destination="zB9-0O-dcm" id="4lU-hX-P2q"/>
+                        <outlet property="scissorsButton" destination="YL1-cz-Z3v" id="Tmx-mq-m6a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="122.78860569715144"/>
         </scene>
-        <!--Results View Controller-->
+        <!--ResultsViewController-->
         <scene sceneID="FXp-fQ-Gfs">
             <objects>
-                <viewController id="fuS-y6-LVT" customClass="ResultsViewController" customModule="RoshamboChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultsViewController" title="ResultsViewController" id="fuS-y6-LVT" customClass="ResultsViewController" customModule="RoshamboChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S1b-06-IOm"/>
                         <viewControllerLayoutGuide type="bottom" id="0Q5-VA-GmK"/>
@@ -84,15 +89,18 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XA3-Y2-t1b">
                                 <rect key="frame" x="67" y="440" width="240" height="77"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play Again!"/>
+                                <state key="normal" title="Play Again"/>
+                                <connections>
+                                    <action selector="playAgain:" destination="fuS-y6-LVT" eventType="touchUpInside" id="iNp-KV-xDd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="playAgainButton" destination="XA3-Y2-t1b" id="q2L-h6-dCj"/>
-                        <outlet property="resultsLabel" destination="5wZ-cD-HOE" id="uEA-gN-kdd"/>
-                        <outlet property="roundImage" destination="S8Q-0Q-SIO" id="BRp-xf-7js"/>
+                        <outlet property="playAgainButton" destination="XA3-Y2-t1b" id="ZtI-f9-sXQ"/>
+                        <outlet property="resultImage" destination="S8Q-0Q-SIO" id="pyL-6d-e7O"/>
+                        <outlet property="resultsLabel" destination="5wZ-cD-HOE" id="4fw-2i-bdx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Udx-qt-fFx" userLabel="First Responder" sceneMemberID="firstResponder"/>

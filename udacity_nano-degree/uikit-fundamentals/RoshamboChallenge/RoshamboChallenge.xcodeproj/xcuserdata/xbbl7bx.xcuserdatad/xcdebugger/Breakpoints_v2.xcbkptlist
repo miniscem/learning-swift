@@ -6,7 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoshamboChallenge/ResultsViewController.swift"
@@ -15,8 +15,70 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11"
             endingLineNumber = "11"
-            landmarkName = "ResultsViewController"
-            landmarkType = "3">
+            landmarkName = "Shape"
+            landmarkType = "13">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RoshamboChallenge.ResultsViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; RoshamboChallenge.ResultsViewController"
+                  moduleName = "RoshamboChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xbbl7bx/Documents/mark_minisce_bnym/professional_development/learning-swift/udacity_nano-degree/uikit-fundamentals/RoshamboChallenge/RoshamboChallenge/ResultsViewController.swift"
+                  timestampString = "510581849.781743"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RoshamboChallenge.ResultsViewController.__allocating_init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; RoshamboChallenge.ResultsViewController"
+                  moduleName = "RoshamboChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xbbl7bx/Documents/mark_minisce_bnym/professional_development/learning-swift/udacity_nano-degree/uikit-fundamentals/RoshamboChallenge/RoshamboChallenge/ResultsViewController.swift"
+                  timestampString = "510581849.784257"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RoshamboChallenge.ResultsViewController.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;RoshamboChallenge.ResultsViewController&gt;"
+                  moduleName = "RoshamboChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xbbl7bx/Documents/mark_minisce_bnym/professional_development/learning-swift/udacity_nano-degree/uikit-fundamentals/RoshamboChallenge/RoshamboChallenge/ResultsViewController.swift"
+                  timestampString = "510581849.786003"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RoshamboChallenge.ResultsViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;RoshamboChallenge.ResultsViewController&gt;"
+                  moduleName = "RoshamboChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xbbl7bx/Documents/mark_minisce_bnym/professional_development/learning-swift/udacity_nano-degree/uikit-fundamentals/RoshamboChallenge/RoshamboChallenge/ResultsViewController.swift"
+                  timestampString = "510581849.78864"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "31">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

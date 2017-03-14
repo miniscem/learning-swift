@@ -8,20 +8,35 @@
 
 import UIKit
 
+enum Shape: String {
+    
+    // represents a play or move
+    
+    case Rock = "Rock"
+    case Paper = "Paper"
+    case Scissors = "Scissors"
+    
+    // this function randomly generates an opponent's play
+    static func randomShape() -> Shape {
+        let shapes = ["Rock", "Paper", "Scissors"]
+        let randomChoice = Int(arc4random_uniform(3))
+        return Shape(rawValue: shapes[randomChoice])!
+    }
+}
+
 class ResultsViewController: UIViewController {
     
-    @IBOutlet weak var resultsLabel: UILabel!
+    @IBOutlet private weak var resultImage: UIImageView!
     @IBOutlet weak var playAgainButton: UIButton!
-    @IBOutlet weak var roundImage: UIImageView!
+    @IBOutlet weak var resultsLabel: UILabel!
     
-    var userPlay: String = ""
-    var computerPlay: String = "" 
+    var userChoice: Shape!
+    private let opponentChoice: Shape = Shape.randomShape()
 
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        displayResult()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,15 +44,36 @@ class ResultsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    private func displayResult() {
+        // Ideally, most of this would be handled by a model.
+        var imageName: String
+        var text: String
+        let matchup = "\(userChoice.rawValue) vs. \(opponentChoice.rawValue)"
+        
+        // Why is an exclamation point necessary? :)
+        switch (userChoice!, opponentChoice) {
+        case let (user, opponent) where user == opponent:
+            text = "\(matchup): it's a tie!"
+            imageName = "tie"
+        case (.Rock, .Scissors), (.Paper, .Rock), (.Scissors, .Paper):
+            text = "You win with \(matchup)!"
+            imageName = "\(userChoice.rawValue)-\(opponentChoice.rawValue)"
+        default:
+            text = "You lose with \(matchup) :(."
+            imageName = "\(opponentChoice.rawValue)-\(userChoice.rawValue)"
+        }
+        
+        imageName = imageName.lowercased()
+        resultImage.image = UIImage(named: imageName)
+        resultsLabel.text = text
     }
-    */
+    
+
+    @IBAction func playAgain(_ sender: UIButton) {
+        //dismiss the view controller
+        dismiss(animated: true, completion: nil)
+    }
+    
 
 }

@@ -10,6 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var paperButton: UIButton!
+    @IBOutlet weak var rockButton: UIButton!
+    @IBOutlet weak var scissorsButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,54 +25,35 @@ class ViewController: UIViewController {
     }
 
     
-    //code only action
+    //MARK: code only action
     @IBAction func throwPaper(_ sender: UIButton) {
         var resultsController : ResultsViewController
         
         resultsController = self.storyboard?.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
+        resultsController.userChoice = Shape.Paper
         
-        
-        resultsController.userPlay = "paper"
-        
-        while resultsController.computerPlay != "" && resultsController.computerPlay != "paper"{
-            resultsController.computerPlay = computerThrow()
-        }
-        
-        
-        if(resultsController.computerPlay == "rock"){
-            resultsController.resultsLabel.text = "Paper covered rock. You win!"
-            resultsController.roundImage.image = #imageLiteral(resourceName: "PaperCoversRock")
-        }else if(resultsController.computerPlay == "scissors"){
-            resultsController.resultsLabel.text = "Scissors cuts paper. You lose!"
-            resultsController.roundImage.image = #imageLiteral(resourceName: "ScissorsCutPaper")
-        }
-        
-        self.present(resultsController, animated: true, completion: nil)
-        
+        present(resultsController, animated: true, completion: nil)
     }
     
-    func computerThrow() -> String{
-        let pcThrow = Int(arc4random_uniform(3) + 1)
-        var pcThrowStr : String
-        
-        switch(pcThrow){
-            case 1:
-                pcThrowStr = "rock"
-            case 2:
-                pcThrowStr = "paper"
-            case 3:
-                pcThrowStr = "scissors"
-            default:
-                pcThrowStr = "rock"
-        }
-        
-        return pcThrowStr
+    //MARK: segue with code action
+    //first, add an identifier with the storyboard
+    //second, give segue a storyboard id in the attributes inspector
+    @IBAction private func throwRock(sender: UIButton){
+        performSegue(withIdentifier: "play", sender: sender)
     }
     
-    @IBAction func throwRock(_ sender: UIButton) {
-        
-        self.performSegue(withIdentifier: "rockSegue", sender: self)
-        
+    
+    //MARK: segue only action
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "play"{
+            let vc = segue.destination as! ResultsViewController
+            vc.userChoice = getUserShape(button: sender as! UIButton)
+        }
+    }
+    
+    private func getUserShape(button: UIButton) -> Shape{
+        let shape = button.title(for: .normal)!
+        return Shape(rawValue: shape)!
     }
 
 }
